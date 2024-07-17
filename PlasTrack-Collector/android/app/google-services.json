@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "884275839977",
+    "project_id": "plastrack-ec49b",
+    "storage_bucket": "plastrack-ec49b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:884275839977:android:2c5105d0e5b34528804178",
+        "android_client_info": {
+          "package_name": "com.example.plas_track"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "884275839977-l2ke7sd4psree2lnnhfpbikt1hc3qqfg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.plas_track",
+            "certificate_hash": "327e0a13b918f7faa879a7aed648976a03d53c58"
+          }
+        },
+        {
+          "client_id": "884275839977-6usp4o5ivb9nq0eniuirfihi190f559e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKE7W0RvPQdmaiHkpL5tcUPMH9x0ErUao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "884275839977-6usp4o5ivb9nq0eniuirfihi190f559e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "884275839977-td2887nb3u1vkelknq0pv4hp64gbqcuc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.plasTrack"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:884275839977:android:0af678190e48f2ab804178",
+        "android_client_info": {
+          "package_name": "com.example.plas_track2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "884275839977-6usp4o5ivb9nq0eniuirfihi190f559e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKE7W0RvPQdmaiHkpL5tcUPMH9x0ErUao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "884275839977-6usp4o5ivb9nq0eniuirfihi190f559e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "884275839977-td2887nb3u1vkelknq0pv4hp64gbqcuc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.plasTrack"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
