@@ -88,7 +88,7 @@ class _AccountPageState extends State<AccountPage> {
                               CustomText(
                                 value:
                                     'Recieved on ${formattedTimestamp(transaction.time_stamp.toDate())}',
-                                color: const customGrey,
+                                color: customGrey,
                                 fontWeight: FontWeight.w700,
                                 size: 12.0,
                               ),
