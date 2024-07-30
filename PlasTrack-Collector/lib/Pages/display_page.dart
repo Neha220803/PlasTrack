@@ -1,23 +1,24 @@
+// ignore_for_file: avoid_print
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class searComm extends StatefulWidget {
-  const searComm({super.key});
+class SearComm extends StatefulWidget {
+  const SearComm({super.key});
 
   @override
-  State<searComm> createState() => _searCommState();
+  State<SearComm> createState() => _SearCommState();
 }
 
-class _searCommState extends State<searComm> {
+class _SearCommState extends State<SearComm> {
   List<bool> _buttonStates = [];
   final CollectionReference _users =
       FirebaseFirestore.instance.collection('location');
   DocumentReference userRef = FirebaseFirestore.instance
       .collection('users')
       .doc('r3lSvX1nRTK9CYkN9CcA');
-  double _lat = 12.9737143;
-  double _lon = 80.2182974;
+  final double _lat = 12.9737143;
+  final double _lon = 80.2182974;
   double haversineDistance(double lat1, double lon1, double lat2, double lon2) {
     const double earthRadius = 6371; // Radius of the Earth in kilometers
 
@@ -56,15 +57,15 @@ class _searCommState extends State<searComm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Communities Near You",
+        title: const Text("Communities Near You",
             style: TextStyle(color: Color(0xFF002D56))),
-        backgroundColor: Color(0xFFFFD9D9),
+        backgroundColor: const Color(0xFFFFD9D9),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             Expanded(
@@ -72,7 +73,7 @@ class _searCommState extends State<searComm> {
                     stream: _users.snapshots(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
-                        return Center(child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       }
 
                       List<DocumentSnapshot> users = snapshot.data!.docs;
@@ -92,11 +93,11 @@ class _searCommState extends State<searComm> {
                               return Card(
                                   color: Colors.white,
                                   elevation: 4,
-                                  margin: EdgeInsets.symmetric(vertical: 8),
+                                  margin: const EdgeInsets.symmetric(vertical: 8),
                                   child: ListTile(
                                     title: Text(
                                       user['name'],
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
                                     subtitle: Text(
@@ -132,8 +133,8 @@ class _searCommState extends State<searComm> {
                                           }
                                         },
                                         icon: _buttonStates[index]
-                                            ? Icon(Icons.done)
-                                            : Icon(Icons.add),
+                                            ? const Icon(Icons.done)
+                                            : const Icon(Icons.add),
                                       ),
                                     ),
                                   ));

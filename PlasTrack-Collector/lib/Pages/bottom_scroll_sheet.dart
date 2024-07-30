@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plas_track2/Utils/constants.dart';
 
 class BottomVendorSheet extends StatelessWidget {
   const BottomVendorSheet({super.key});
@@ -17,7 +18,7 @@ DraggableScrollableSheet _buildDraggableScrollableSheet() {
     builder: (BuildContext context, ScrollController scrollController) {
       return Container(
         decoration: const BoxDecoration(
-          color: Colors.blue,
+          color: blue,
           // border: Border.all(color: Colors.blue, width: 2),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(8),

@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:plas_track2/HomePage.dart';
-import 'package:plas_track2/NGO/MapPage.dart';
-import 'package:plas_track2/NGO/PaymentPage.dart';
-import 'package:plas_track2/SideBar.dart';
+import 'package:plas_track2/Pages/home_page.dart';
+import 'package:plas_track2/Pages/NGO/map_page.dart';
+import 'package:plas_track2/Pages/NGO/payment_page.dart';
+import 'package:plas_track2/Pages/side_bar.dart';
+import 'package:plas_track2/Utils/constants.dart';
+import 'package:plas_track2/Widgets/custom_text.dart';
 
 class HomeNavPage extends StatefulWidget {
   const HomeNavPage({super.key});
@@ -26,10 +28,7 @@ class _HomeNavPageState extends State<HomeNavPage> {
     return Scaffold(
       drawer: SideBar(),
       appBar: AppBar(
-        title: Text(
-          "Plastrack",
-          style: TextStyle(color: Colors.white),
-        ),
+        title: CustomText(value: "Plastrack", color: white),
         backgroundColor: Colors.black,
         iconTheme: IconThemeData(color: Colors.white),
       ),

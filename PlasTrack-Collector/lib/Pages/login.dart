@@ -1,23 +1,12 @@
-// ignore_for_file: prefer_const_constructors
-
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
-import 'package:plas_track2/HomeNavPage.dart';
-
-// Define the User model
-class Users {
-  final String displayName;
-  final String email;
-
-  Users({
-    required this.displayName,
-    required this.email,
-  });
-}
+import 'package:plas_track2/Functions/auth.dart';
+import 'package:plas_track2/Pages/home_nav_page.dart';
+import 'package:plas_track2/Utils/constants.dart';
+import 'package:plas_track2/Widgets/custom_text.dart';
+import 'package:plas_track2/Widgets/custome_button.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -47,13 +36,13 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 150),
+              const SizedBox(height: 150),
               Image.asset("images/icon.png"),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               const ListTile(
-                title: Text(
-                  "Welcome to the Vendor App!",
-                  style: TextStyle(fontSize: 26),
+                title: CustomText(
+                  value: "Welcome to the Vendor App!",
+                  size: 26,
                 ),
                 subtitle: Text("Please log in to continue"),
               ),
@@ -92,33 +81,28 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               const SizedBox(height: 20), //Add spacing below the form
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  backgroundColor: Colors.black,
-                  foregroundColor: Colors.white,
-                  fixedSize: const Size(400, 50),
-                ),
-                onPressed: () {
+              CustomButton(
+                text: "LOG IN",
+                callback: () {
                   if (_formKey.currentState!.validate()) {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HomeNavPage()),
+                      MaterialPageRoute(
+                          builder: (context) => const HomeNavPage()),
                     );
                   }
                 },
-                child: const Text("LOG IN"),
+                fixedSize: const Size(400, 50),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               ListTile(
-                title: const Text(
-                  "Don't have an account?",
+                title: const CustomText(
+                  value: "Don't have an account?",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  size: 18,
+                  fontWeight: FontWeight.bold,
                 ),
                 subtitle: TextButton(
                   onPressed: () {
@@ -142,24 +126,18 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 10),
               Text(
                 _loginMessage,
-                style: const TextStyle(color: Colors.red),
+                style: const TextStyle(color: red),
               ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  backgroundColor: Colors.black,
-                  foregroundColor: Colors.white,
-                  fixedSize: const Size(400, 50),
-                ),
-                onPressed: () async {
+              CustomButton(
+                text: "Log in with Google",
+                fixedSize: const Size(400, 50),
+                callback: () async {
                   showDialog(
                     context: context,
                     barrierDismissible:
                         false, // Prevents user from dismissing the dialog
                     builder: (BuildContext context) {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(
                           valueColor:
                               AlwaysStoppedAnimation<Color>(Colors.black),
@@ -171,46 +149,15 @@ class _LoginPageState extends State<LoginPage> {
                   Navigator.of(context, rootNavigator: true).pop();
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => HomeNavPage()),
+                    MaterialPageRoute(
+                        builder: (context) => const HomeNavPage()),
                   );
                 },
-                child: const Text("Log in with Google"),
               ),
             ],
           ),
         ),
       ),
     );
-  }
-}
-
-Future<Users> signInWithGoogle() async {
-  try {
-    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    if (googleUser == null) {
-      throw Exception('Google Sign-In was canceled by the user.');
-    }
-
-    GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-    AuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-
-    UserCredential userCred =
-        await FirebaseAuth.instance.signInWithCredential(credential);
-    print(userCred.user?.displayName);
-    String displayName = userCred.user?.displayName ?? "";
-    String email = userCred.user?.email ?? "";
-
-    // Create a User object
-    Users users = Users(
-      displayName: displayName,
-      email: email,
-    );
-    return users;
-  } catch (e) {
-    print("Google Sign-In Error: $e");
-    rethrow; // Rethrow the error to handle it in the UI or caller function
   }
 }

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, avoid_print
+// ignore_for_file: avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -132,7 +132,7 @@ class _TryNotiState extends State<TryNoti> {
         );
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Notification sent successfully')),
+          const SnackBar(content: Text('Notification sent successfully')),
         );
         _titleController.clear();
       } catch (e) {
@@ -165,7 +165,7 @@ class _TryNotiState extends State<TryNoti> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Send Notification'),
+        title: const Text('Send Notification'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -177,7 +177,8 @@ class _TryNotiState extends State<TryNoti> {
               children: [
                 TextFormField(
                   controller: _titleController,
-                  decoration: InputDecoration(labelText: 'Notification Body'),
+                  decoration:
+                      const InputDecoration(labelText: 'Notification Body'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter a notification body';
@@ -185,7 +186,7 @@ class _TryNotiState extends State<TryNoti> {
                     return null;
                   },
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
                     if (!_loading) {
@@ -194,11 +195,11 @@ class _TryNotiState extends State<TryNoti> {
                     }
                   },
                   child: _loading
-                      ? CircularProgressIndicator(
+                      ? const CircularProgressIndicator(
                           valueColor:
                               AlwaysStoppedAnimation<Color>(Colors.black),
                         )
-                      : Text('Send Notification'),
+                      : const Text('Send Notification'),
                 ),
               ],
             ),

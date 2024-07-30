@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:plas_track/Pages/SideNavBar/map_page.dart';
-import 'package:plas_track/Pages/SideNavBar/TryNotiPage.dart';
+import 'package:plas_track/Pages/SideNavBar/try_noti_page.dart';
 import 'package:plas_track/Pages/login.dart';
 
 class SideBar extends StatefulWidget {

@@ -1,11 +1,13 @@
-// ignore_for_file: prefer_const_constructors
-
+// ignore_for_file: use_build_context_synchronously, avoid_print
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:plas_track2/Utils/constants.dart';
+import 'package:plas_track2/Widgets/custom_text.dart';
+import 'package:plas_track2/Widgets/custome_button.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class Paymentpage extends StatefulWidget {
-  const Paymentpage({Key? key}) : super(key: key);
+  const Paymentpage({super.key});
 
   @override
   State<Paymentpage> createState() => _PaymentpageState();
@@ -45,27 +47,24 @@ class _PaymentpageState extends State<Paymentpage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 Container(
                   height: 40,
                   width: 350,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     border: Border(
-                      bottom: BorderSide(color: Colors.black, width: 2.0),
+                      bottom: BorderSide(color: black, width: 2.0),
                     ),
                   ),
-                  child: Text(
-                    'Enter Recycling Bonus',
-                    style: TextStyle(
-                      color: Colors.grey[900],
-                      fontSize: 21.59,
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w700,
-                      height: 0,
-                    ),
+                  child: CustomText(
+                    value: 'Enter Recycling Bonus',
+                    color: grey[900],
+                    size: 21.59,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
-                SizedBox(height: 60),
+                const SizedBox(height: 60),
                 DropdownButton(
                   value: _btn2SelectedVal,
                   hint: const Text('Choose a User'),
@@ -77,14 +76,14 @@ class _PaymentpageState extends State<Paymentpage> {
                   },
                   items: _dropDownMenuItems,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 Container(
                   width: 300.39,
                   height: 148.44,
                   decoration: BoxDecoration(
-                    color: Color(0xFF002D56),
+                    color: const Color(0xFF002D56),
                     borderRadius: BorderRadius.circular(31.62),
                   ),
                   child: Padding(
@@ -92,22 +91,19 @@ class _PaymentpageState extends State<Paymentpage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Enter Credit Amount',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 21.84,
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w700,
-                            height: 0,
-                          ),
+                        const CustomText(
+                          value: 'Enter Credit Amount',
+                          color: white,
+                          size: 21.84,
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w700,
                         ),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         TextFormField(
                           controller: _amountController,
                           keyboardType: TextInputType.number,
-                          style: TextStyle(
-                            color: Colors.white,
+                          style: const TextStyle(
+                            color: white,
                             fontSize: 23,
                             fontFamily: 'Roboto',
                             fontWeight: FontWeight.w700,
@@ -118,11 +114,12 @@ class _PaymentpageState extends State<Paymentpage> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
-                ElevatedButton(
-                  onPressed: () {
+                CustomButton(
+                  text: "Pys",
+                  callback: () {
                     int amount =
                         (double.parse(_amountController.text) * 100).toInt();
                     Razorpay razorpay = Razorpay();
@@ -149,27 +146,6 @@ class _PaymentpageState extends State<Paymentpage> {
                         handleExternalWalletSelected);
                     razorpay.open(options);
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.all(16.0),
-                    child: Center(
-                      child: Text(
-                        'View Payment Options',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                  ),
                 ),
               ],
             ),
@@ -217,14 +193,14 @@ class _PaymentpageState extends State<Paymentpage> {
         context, "External Wallet Selected", "${response.walletName}");
   }
 
-  void showAlertDialog(BuildContext context, String title, String Message) {
+  void showAlertDialog(BuildContext context, String title, String message) {
     Widget continueButton = ElevatedButton(
       child: const Text("Continue"),
       onPressed: () {},
     );
     AlertDialog alert = AlertDialog(
       title: Text(title),
-      content: Text(Message),
+      content: Text(message),
     );
     showDialog(
         context: context,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:plas_track2/BottomScrollSheet.dart';
+import 'package:plas_track2/Utils/constants.dart';
+import 'package:plas_track2/Widgets/custom_text.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -29,25 +30,21 @@ class _HomePageState extends State<HomePage> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text(
-                    "Welcome to our innovative world of sustainability!",
-                    style: TextStyle(
-                      color: Colors.black54, //Updated Color
-                      fontSize: 30, //Increased font size
-                      fontWeight: FontWeight.bold,
-                      fontFamily:
-                          'Pacifico', // Change to a more attractive font
-                    ),
+                  const CustomText(
+                    value: "Welcome to our innovative world of sustainability!",
+                    color: black,
+                    size: 30,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Pacifico',
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 20), // Increased spacing
-                  Text(
-                    "We're on a mission to empower individuals to make a positive impact on the environment. Our app seamlessly connects you to recycling solutions, educational resources, and a community of like-minded changemakers. Join us in creating a greener future, one small action at a time.",
-                    style: TextStyle(
-                      color: Colors.grey[800],
-                      fontSize: 18, // Increased font size
-                      fontFamily: 'Roboto',
-                    ),
+                  const SizedBox(height: 20),
+                  CustomText(
+                    value:
+                        "We're on a mission to empower individuals to make a positive impact on the environment. Our app seamlessly connects you to recycling solutions, educational resources, and a community of like-minded changemakers. Join us in creating a greener future, one small action at a time.",
+                    color: Colors.grey[800],
+                    size: 18,
+                    fontFamily: 'Roboto',
                     textAlign: TextAlign.center,
                   ),
                 ],

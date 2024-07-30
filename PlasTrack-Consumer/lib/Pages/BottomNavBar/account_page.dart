@@ -88,7 +88,7 @@ class _AccountPageState extends State<AccountPage> {
                               CustomText(
                                 value:
                                     'Recieved on ${formattedTimestamp(transaction.time_stamp.toDate())}',
-                                color: const Color(0xFF898989),
+                                color: const customGrey,
                                 fontWeight: FontWeight.w700,
                                 size: 12.0,
                               ),
@@ -97,7 +97,7 @@ class _AccountPageState extends State<AccountPage> {
                           trailing: Text(
                             '+₹${transaction.amount}',
                             style: const TextStyle(
-                              color: Color(0xFF898989),
+                              color: customGrey,
                               fontWeight: FontWeight.w700,
                               fontSize: 16.0,
                             ),

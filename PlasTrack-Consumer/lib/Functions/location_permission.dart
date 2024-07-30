@@ -1,10 +1,12 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:location/location.dart';
 
 late Location location;
 bool _serviceEnabled = false;
 PermissionStatus? _permissionGranted;
-LocationData? _locationData;
+LocationData? locationData;
 
 Future<void> checkLocationPermission() async {
   _serviceEnabled = await location.serviceEnabled();
@@ -23,7 +25,7 @@ Future<void> checkLocationPermission() async {
     }
   }
 
-  _locationData = await location.getLocation();
+  locationData = await location.getLocation();
   // setState(() {});
 }
 

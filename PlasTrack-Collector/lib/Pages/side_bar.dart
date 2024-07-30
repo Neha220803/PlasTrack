@@ -1,15 +1,15 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: use_build_context_synchronously
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:plas_track2/CollectionHistory.dart';
-import 'package:plas_track2/CollectionReq.dart';
-import 'package:plas_track2/PastOrders.dart';
-import 'package:plas_track2/login.dart';
+import 'package:plas_track2/Pages/collection_history.dart';
+import 'package:plas_track2/Pages/collection_req.dart';
+import 'package:plas_track2/Pages/past_orders.dart';
+import 'package:plas_track2/Pages/login.dart';
 
 class SideBar extends StatefulWidget {
-  const SideBar({Key? key}) : super(key: key);
+  const SideBar({super.key});
 
   @override
   State<SideBar> createState() => _SideBarState();
@@ -39,56 +39,60 @@ class _SideBarState extends State<SideBar> {
           Container(
             width: double.infinity,
             height: 300,
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             color: Colors.black,
             child: Center(
               child: Text(
-                "${_user?.displayName ?? 'No Names'}",
-                style: TextStyle(color: Colors.white, fontSize: 40),
+                _user?.displayName ?? 'No Names',
+                style: const TextStyle(color: Colors.white, fontSize: 40),
               ),
             ),
           ),
           ListTile(
-            leading: Icon(Icons.home),
-            title: Text('Home'),
+            leading: const Icon(Icons.home),
+            title: const Text('Home'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.history),
-            title: Text('Collection Requests'),
+            leading: const Icon(Icons.history),
+            title: const Text('Collection Requests'),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CollectionRequest()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const CollectionRequest()));
             },
           ),
           ListTile(
-            leading: Icon(Icons.history_edu),
-            title: Text('Collection History'),
+            leading: const Icon(Icons.history_edu),
+            title: const Text('Collection History'),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CollecHistory()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const CollecHistory()));
             },
           ),
           ListTile(
-            leading: Icon(Icons.money),
-            title: Text('Transaction History'),
+            leading: const Icon(Icons.money),
+            title: const Text('Transaction History'),
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => PastOrders()));
+                  MaterialPageRoute(builder: (context) => const PastOrders()));
             },
           ),
           ListTile(
-            leading: Icon(Icons.arrow_back),
-            title: Text("Log Out"),
+            leading: const Icon(Icons.arrow_back),
+            title: const Text("Log Out"),
             onTap: () async {
               await GoogleSignIn().signOut();
               FirebaseAuth.instance.signOut();
               Navigator.of(context).popUntil((route) => route.isFirst);
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => LoginPage()),
+                MaterialPageRoute(builder: (context) => const LoginPage()),
               );
             },
           )

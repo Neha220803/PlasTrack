@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                   value: "Welcome!",
                   size: 30,
                 ),
-                subtitle: CustomText(value: "please log in to continue"),
+                subtitle: CustomText(value: "Please log in to continue"),
               ),
               Form(
                 key: _formKey,
