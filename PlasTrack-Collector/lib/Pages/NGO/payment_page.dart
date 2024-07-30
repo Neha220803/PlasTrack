@@ -118,7 +118,7 @@ class _PaymentpageState extends State<Paymentpage> {
                   height: 40,
                 ),
                 CustomButton(
-                  text: "Pys",
+                  text: "View Payment Options",
                   callback: () {
                     int amount =
                         (double.parse(_amountController.text) * 100).toInt();
