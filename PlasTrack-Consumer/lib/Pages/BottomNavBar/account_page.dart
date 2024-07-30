@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:plas_track/Functions/format_time.dart';
+import 'package:plas_track/Utils/constants.dart';
+import 'package:plas_track/Widgets/custom_text.dart';
 
 class TransactionData {
   final String? toUser;
@@ -16,12 +18,6 @@ class TransactionData {
   });
 }
 
-String formattedTimestamp(DateTime timestamp) {
-  String formattedDate = DateFormat('MMMM d, y').format(timestamp);
-
-  return '$formattedDate';
-}
-
 class AccountPage extends StatefulWidget {
   const AccountPage({Key? key}) : super(key: key);
 
@@ -32,7 +28,6 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> {
   final CollectionReference _transactions =
       FirebaseFirestore.instance.collection('transactions');
-      
 
   @override
   Widget build(BuildContext context) {
@@ -42,28 +37,25 @@ class _AccountPageState extends State<AccountPage> {
         if (snapshot.hasData) {
           return Column(
             children: [
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
                 height: 40,
                 width: 350,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(color: Colors.black, width: 2.0),
                   ),
                 ),
-                child: Text(
-                  'Incentives Recieved',
-                  style: TextStyle(
-                    color: Colors.grey[900],
-                    fontSize: 21.59,
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w700,
-                    height: 0,
-                  ),
+                child: CustomText(
+                  value: 'Incentives Recieved',
+                  color: grey[900],
+                  size: 21.59,
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w700,
                 ),
               ),
               SingleChildScrollView(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: snapshot.data?.docs.length ?? 0,
@@ -80,11 +72,11 @@ class _AccountPageState extends State<AccountPage> {
                       padding: const EdgeInsets.symmetric(vertical: 4),
                       child: Card(
                         elevation: 4,
-                        color: Colors.white,
+                        color: white,
                         child: ListTile(
                           title: Text(
                             transaction.reason ?? "",
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.w700,
                               fontSize: 20.0,
                             ),
@@ -92,20 +84,19 @@ class _AccountPageState extends State<AccountPage> {
                           subtitle: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(height: 5),
-                              Text(
-                                'Recieved on ${formattedTimestamp(transaction.time_stamp.toDate())}',
-                                style: TextStyle(
-                                  color: Color(0xFF898989),
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12.0,
-                                ),
+                              const SizedBox(height: 5),
+                              CustomText(
+                                value:
+                                    'Recieved on ${formattedTimestamp(transaction.time_stamp.toDate())}',
+                                color: const Color(0xFF898989),
+                                fontWeight: FontWeight.w700,
+                                size: 12.0,
                               ),
                             ],
                           ),
                           trailing: Text(
                             '+₹${transaction.amount}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Color(0xFF898989),
                               fontWeight: FontWeight.w700,
                               fontSize: 16.0,
@@ -122,7 +113,7 @@ class _AccountPageState extends State<AccountPage> {
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
       },
     );

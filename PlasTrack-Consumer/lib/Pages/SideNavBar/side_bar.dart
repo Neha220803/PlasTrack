@@ -1,11 +1,9 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:plas_track/NGO/MapPage.dart';
-import 'package:plas_track/SideNavBar/TryNotiPage.dart';
-import 'package:plas_track/login.dart';
+import 'package:plas_track/Pages/SideNavBar/map_page.dart';
+import 'package:plas_track/Pages/SideNavBar/TryNotiPage.dart';
+import 'package:plas_track/Pages/login.dart';
 
 class SideBar extends StatefulWidget {
   const SideBar({Key? key}) : super(key: key);
@@ -38,52 +36,52 @@ class _SideBarState extends State<SideBar> {
           Container(
             width: double.infinity,
             height: 300,
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             color: Colors.black,
             child: Center(
               child: Text(
-                "${_user?.displayName ?? 'No Names'}",
-                style: TextStyle(color: Colors.white, fontSize: 40),
+                _user?.displayName ?? 'No Names',
+                style: const TextStyle(color: Colors.white, fontSize: 40),
               ),
             ),
           ),
           ListTile(
-            leading: Icon(Icons.home),
-            title: Text('Home'),
+            leading: const Icon(Icons.home),
+            title: const Text('Home'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: Icon(Icons.map),
-            title: Text("View Maps"),
+            leading: const Icon(Icons.map),
+            title: const Text("View Maps"),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MapPage()),
+                MaterialPageRoute(builder: (context) => const MapPage()),
               );
             },
           ),
           ListTile(
-            leading: Icon(Icons.notifications),
-            title: Text("Try Notification"),
+            leading: const Icon(Icons.notifications),
+            title: const Text("Try Notification"),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => TryNoti()),
+                MaterialPageRoute(builder: (context) => const TryNoti()),
               );
             },
           ),
           ListTile(
-            leading: Icon(Icons.arrow_back),
-            title: Text("Log Out"),
+            leading: const Icon(Icons.arrow_back),
+            title: const Text("Log Out"),
             onTap: () async {
               await GoogleSignIn().signOut();
               FirebaseAuth.instance.signOut();
               Navigator.of(context).popUntil((route) => route.isFirst);
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => LoginPage()),
+                MaterialPageRoute(builder: (context) => const LoginPage()),
               );
             },
           )

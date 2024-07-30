@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:plas_track/Home/AccountPage.dart';
-import 'package:plas_track/Home/DonatePage.dart';
-import 'package:plas_track/Home/HomePage.dart';
-import 'package:plas_track/SideNavBar/SideBar.dart';
+import 'package:plas_track/Pages/BottomNavBar/account_page.dart';
+import 'package:plas_track/Pages/BottomNavBar/donate_page.dart';
+import 'package:plas_track/Pages/BottomNavBar/home_page.dart';
+import 'package:plas_track/Pages/SideNavBar/side_bar.dart';
 
 class HomeNavPage extends StatefulWidget {
   const HomeNavPage({super.key});
@@ -13,23 +13,23 @@ class HomeNavPage extends StatefulWidget {
 class _HomeNavPageState extends State<HomeNavPage> {
   int _currentindex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
-    HomePage(),
+    const HomePage(),
     //MapTry(),
-    DonatePlasticPage(),
-    AccountPage(),
+    const DonatePlasticPage(),
+    const AccountPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SideBar(),
+      drawer: const SideBar(),
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Plastrack",
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.black,
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: _widgetOptions[_currentindex], // Display the selected widget
       bottomNavigationBar: BottomNavigationBar(

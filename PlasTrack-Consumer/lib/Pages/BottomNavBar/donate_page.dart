@@ -1,8 +1,8 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:plas_track/Functions/location_permission.dart';
+import 'package:plas_track/Widgets/custom_text.dart';
+import 'package:plas_track/Widgets/custome_button.dart';
 
 class DonatePlasticPage extends StatefulWidget {
   const DonatePlasticPage({Key? key}) : super(key: key);
@@ -13,57 +13,13 @@ class DonatePlasticPage extends StatefulWidget {
 
 class _DonatePlasticPageState extends State<DonatePlasticPage> {
   late Location location;
-  bool _serviceEnabled = false;
-  PermissionStatus? _permissionGranted;
-  LocationData? _locationData;
   bool _loading = false; // Add a loading state variable
 
   @override
   void initState() {
     super.initState();
     location = Location();
-    _checkLocationPermission();
-  }
-
-  Future<void> _checkLocationPermission() async {
-    _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
-        return;
-      }
-    }
-
-    _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
-        return;
-      }
-    }
-
-    _locationData = await location.getLocation();
-    setState(() {});
-  }
-
-  Future<void> _saveLocationToFirestore(
-      double latitude, double longitude) async {
-    try {
-      CollectionReference locationCollection =
-          FirebaseFirestore.instance.collection('location');
-
-      // Add a new document to the collection with the specified ID
-      await locationCollection.add({
-        'latitude': latitude,
-        'longitude': longitude,
-        'timestamp': DateTime
-            .now(), // Add a timestamp field to record the time of the donation
-      });
-
-      print('Location data added to Firestore successfully!');
-    } catch (e) {
-      print('Error adding location data to Firestore: $e');
-    }
+    checkLocationPermission();
   }
 
   @override
@@ -85,16 +41,10 @@ class _DonatePlasticPageState extends State<DonatePlasticPage> {
           ),
           const SizedBox(height: 20),
           Stack(alignment: Alignment.center, children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.black,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                fixedSize: const Size(300, 50),
-              ),
-              onPressed: () async {
+            CustomButton(
+              text: "Yes, Flag my location",
+              fixedSize: const Size(300, 50),
+              callback: () async {
                 setState(() {
                   _loading = true; // Set loading to true when button is pressed
                 });
@@ -105,7 +55,7 @@ class _DonatePlasticPageState extends State<DonatePlasticPage> {
                 double longitude = locationData.longitude!;
 
                 // Save location data to Firestore
-                await _saveLocationToFirestore(latitude, longitude);
+                await saveLocationToFirestore(latitude, longitude);
 
                 setState(() {
                   _loading = false; // Set loading to false after data is saved
@@ -123,11 +73,11 @@ class _DonatePlasticPageState extends State<DonatePlasticPage> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 _loading
-                                    ? CircularProgressIndicator() // Show circular progress indicator when loading
+                                    ? const CircularProgressIndicator() // Show circular progress indicator when loading
                                     : Image.asset('images/success.png',
                                         height: 150),
                                 const SizedBox(height: 20),
-                                Text(
+                                const Text(
                                   "Successful!",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
@@ -135,7 +85,7 @@ class _DonatePlasticPageState extends State<DonatePlasticPage> {
                                     fontSize: 24,
                                   ),
                                 ),
-                                Text(
+                                const Text(
                                   "Thank You for Your Contribution!",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
@@ -147,17 +97,17 @@ class _DonatePlasticPageState extends State<DonatePlasticPage> {
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 40),
-                                  child: Text(
-                                    "Your response has been noted for the recycling program. You will receive the appropriate reward when the order reaches the warehouse.\n\nLatitude: $latitude\nLongitude: $longitude",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 16, color: Colors.grey),
-                                  ),
+                                  child: CustomText(
+                                      value:
+                                          "Your response has been noted for the recycling program. You will receive the appropriate reward when the order reaches the warehouse.\n\nLatitude: $latitude\nLongitude: $longitude",
+                                      textAlign: TextAlign.center,
+                                      size: 16,
+                                      color: Colors.grey),
                                 ),
                                 const SizedBox(height: 20),
                                 TextButton(
                                   onPressed: () => Navigator.pop(context),
-                                  child: Text("OK"),
+                                  child: const Text("OK"),
                                 ),
                               ],
                             ),
@@ -168,7 +118,6 @@ class _DonatePlasticPageState extends State<DonatePlasticPage> {
                   },
                 );
               },
-              child: const Text("Yes, Flag my location"),
             ),
           ]),
           const SizedBox(height: 10),
