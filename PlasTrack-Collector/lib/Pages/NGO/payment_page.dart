@@ -200,7 +200,9 @@ class _PaymentpageState extends State<Paymentpage> {
     );
     AlertDialog alert = AlertDialog(
       title: Text(title),
-      content: Text(message),
+      content: Column(
+        children: [Text(message), continueButton],
+      ),
     );
     showDialog(
         context: context,
